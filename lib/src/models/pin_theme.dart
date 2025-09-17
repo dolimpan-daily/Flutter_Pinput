@@ -44,7 +44,7 @@ class PinTheme {
   ///  this.shape = BoxShape.rectangle,
   ///  ```
   /// The decoration of each [Pinput] submitted field
-  final BoxDecoration? decoration;
+  final Decoration? decoration;
 
   /// Theme of the individual pin items for following states:
   /// default, focused pin, submitted pin, following pin, disabled pin and error pin
@@ -104,25 +104,31 @@ class PinTheme {
     BoxShape? shape,
   }) {
     assert(decoration != null);
-    return copyWith(
-      decoration: decoration?.copyWith(
-        color: color,
-        image: image,
-        border: border,
-        borderRadius: borderRadius,
-        boxShadow: boxShadow,
-        gradient: gradient,
-        backgroundBlendMode: backgroundBlendMode,
-        shape: shape,
-      ),
-    );
+    if (decoration is BoxDecoration) {
+      return copyWith(
+        decoration: (decoration as BoxDecoration?)?.copyWith(
+          color: color,
+          image: image,
+          border: border,
+          borderRadius: borderRadius,
+          boxShadow: boxShadow,
+          gradient: gradient,
+          backgroundBlendMode: backgroundBlendMode,
+          shape: shape,
+        ),
+      );
+    }
+    return this;
   }
 
   /// Create a new [PinTheme] from the current instance with new border
   PinTheme copyBorderWith({required Border border}) {
     assert(decoration != null);
-    return copyWith(
-      decoration: decoration?.copyWith(border: border),
-    );
+    if (decoration is BoxDecoration) {
+      return copyWith(
+        decoration: (decoration as BoxDecoration?)?.copyWith(border: border),
+      );
+    }
+    return this;
   }
 }
