@@ -476,12 +476,12 @@ class _PinputState extends State<Pinput>
       return PinItemStateType.error;
     }
 
-    if (hasFocus && index == selectedIndex.clamp(0, widget.length - 1)) {
-      return PinItemStateType.focused;
-    }
-
     if (index < selectedIndex) {
       return PinItemStateType.submitted;
+    }
+
+    if (hasFocus && index == selectedIndex.clamp(0, widget.length - 1)) {
+      return PinItemStateType.focused;
     }
 
     return PinItemStateType.following;
